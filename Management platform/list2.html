@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+		<title>数据——商家列表</title>
+		<link rel="stylesheet" href="libs/css/common.css">
+		<link rel="stylesheet" href="libs/fonts/iconfont.css">
+		<link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/default.css">
+		<link href="dist/pagination.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			ul,
+			li {
+				list-style: none;
+			}
+
+			#wrapper {
+				width: 1570px;
+				margin: 20px auto;
+				border: 1px solid #dfe6ec;
+			}
+
+			.data-container ul {
+				padding: 0;
+				margin: 0;
+			}
+
+			.data-container li {
+				margin-bottom: 5px;
+				padding: 5px 10px;
+				border-bottom: 1px solid #dfe6ec;
+				color: #000;
+			}
+
+			#htmleaf {
+				background-color: #fff;
+			}
+			#top .cell:first-child{
+				width: 5%;
+				
+			}
+			#top .cell{
+				width: 23%;
+				float: left;
+				padding-left: 10px;
+			}
+			#top{
+				height: 40px;
+				font-size: 14px;
+				color: #000000;
+				font-weight: bold;
+				background-color: #EEF1F6;
+				padding-top: 10px;
+			}
+			
+			.data-container ul li .span{
+				float: left;
+				margin-left: 1px;
+			}
+			.data-container ul li span:nth-child(2){
+				float: left;
+			}
+			.data-container ul li span:nth-child(3){
+				display: inline-block;
+				width: 252px;
+				margin-left: 18.5%;
+			}
+			.data-container ul li span:nth-child(4){
+				display: inline-block;
+				width: 252px;
+				margin-left: 7%;
+			}
+			.data-container ul li span{
+				display: inline-block;
+				width: 76px;
+				height: 44px;
+				font-size: 14px;
+				text-align: left;
+				    box-sizing: border-box;
+				    text-overflow: ellipsis;
+					    white-space: normal;
+					    word-break: break-all;
+					    line-height: 24px;
+						overflow: hidden;
+			}
+			.data-container ul li span:last-child{
+				width: 142px;
+				margin-left: 108px;
+			}
+			.dit {
+				padding: 2px 6px;
+				font-size: 12px;
+				border-radius: 4px;
+				border: 1px solid #c4c4c4;
+				color: #1f2d3d;
+			}
+			.add {
+				padding: 2px 6px;
+				font-size: 12px;
+				border-radius: 4px;
+				border: 1px solid #c4c4c4;
+				color: #1f2d3d;
+			}
+			.del {
+				color: #fff;
+				padding: 2px 6px;
+				font-size: 12px;
+				border-radius: 4px;
+				border: none;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 菜单列表 -->
+			<div class="menu">
+				<div class="sideMenu">
+					<ul>
+						<li class="nLi on">
+							<div class="text">
+								<i class="icon iconfont icon-fangkuaizuhe" style="color:#20a0ff"></i>
+								<a href="index.html">
+									<h3 style="color:#20a0ff">首页</h3>
+								</a>
+							</div>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-wenben"></i>
+								<h3>数据管理</h3>
+							</div>
+							<ul class="sub" style="display: block;">
+								<li><a href="list1.html">用户列表</a></li>
+								<li><a href="list2.html">商家列表</a></li>
+								<li><a href="list3.html">食品列表</a></li>
+								<li><a href="list4.html">订单列表</a></li>
+								<li><a href="list5.html">管理员列表</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-icon-add-3"></i>
+								<h3>添加数据</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="addP.html">添加商铺</a></li>
+								<li><a href="">添加商品</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-xingxing"></i>
+								<h3>图表</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="">用户分布</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-bianji"></i>
+								<h3>编辑</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="">文本编辑</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-shezhi"></i>
+								<h3>设置</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="">管理员设置</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-shuoming"></i>
+								<h3>说明</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="">说明</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- 内容 -->
+			<div class="content">
+				<!-- 首页 -->
+				<div class="home">
+					<div class="he_header">
+						<div class="hr_text">
+							<span class="hr_item">
+								<span class="hr_txt"><a href="index.html" style="text-decoration: none;color: #000000;">首页</a>&nbsp;&nbsp;/&nbsp;&nbsp;数据管理&nbsp;&nbsp;/&nbsp;&nbsp;商家列表</span>
+							</span>
+						</div>
+
+						<div class="hr_user">
+							<img src="img/default.jpg" alt="" class="hr_logo">
+							<ul class="hr_menu" style="display: none;">
+								<li class="hr_list"><a href="index.html" style="color: #000000;">首页</a></li>
+								<li class="hr_list" id="tui">退出</li>
+							</ul>
+						</div>
+					</div>
+					<!-- 数据管理 -->
+					<div id="data">
+						<article class="htmleaf-container" id="htmleaf">
+							
+							<div id="wrapper">
+								<div id="top">
+									<div class="cell">&nbsp;</div>
+									<div class="cell">店铺名称</div>
+									<div class="cell">店铺地址</div>
+									<div class="cell">店铺介绍</div>
+									<div class="cell">操作</div>
+								</div>
+								<section>
+									<div class="data-container">
+										
+									</div>
+									<div id="pagination-demo1"></div>
+								</section>
+							</div>
+						</article>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+
+
+
+		<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script src="libs/js/index.js"></script>
+		<script src="js/y.js"></script>
+		<script src="dist/pagination.js"></script>
+	</body>
+</html>
+<script>
+	window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')
+</script>
+<script type="text/javascript">
+	// 退出登录
+	var tui = $("#tui")
+	document.getElementById("tui").addEventListener('click', function() {
+		$.ajax({
+			type: 'GET',
+			url: 'https://elm.cangdu.org/admin/singout',
+			dataType: 'json',
+			success: function(data) {
+				console.log(data)
+				if (data.success) {
+					location.href = 'denglu.html';
+				} else {
+
+				}
+			}
+		});
+	});
+	// 用户列表
+	$.ajax({
+		type: 'GET',
+		url: 'https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762',
+		dataType: 'json',
+		success: function(data) {
+			console.log(data)
+				function createDemo(name) {
+					var container = $('#pagination-' + name);
+					var sources = function() {
+						var result = [];
+				
+						for (var i = 1; i < 21990; i++) {
+							result.push(i);
+						}
+				
+						return result;
+					}();
+					console.log(sources)
+					var options = {
+						dataSource: sources,
+						className: 'paginationjs-theme-blue',
+						callback: function(response, pagination) {
+							// window.console && console.log(response, pagination);
+				
+							var dataHtml = '<ul>';
+				
+							$.each(response, function(index, item) {
+								console.log(item)
+								for(var i=0; i<data.length; i++){
+								dataHtml += '<li><span class="span">></span><span>'+ data[i].name +'</span><span>'+data[i].address+'</span><span>'+data[i].description+ '</span><span><a href="#" class="dit">编辑</a><a href="addPin.html" class="add">添加食品</a><a href="#" class="del">删除</a></span></li>';
+								}
+							});
+				
+							dataHtml += '</ul>';
+				
+							container.prev().html(dataHtml);
+						}
+					};
+				
+					// $.pagination(container, options);
+				
+					// container.addHook('beforeInit', function() {
+					// 	// window.console && console.log('beforeInit...');
+					// });
+					container.pagination(options);
+				
+					// container.addHook('beforePageOnClick', function() {
+					// 	// window.console && console.log('beforePageOnClick...');
+					// 	//return false
+					// });
+				
+					// return container;
+				}
+				
+				createDemo('demo1');
+				
+		}
+	})
+	
+	
+</script>

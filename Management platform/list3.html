@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+		<title>数据——食品列表</title>
+		<link rel="stylesheet" href="libs/css/common.css">
+		<link rel="stylesheet" href="libs/fonts/iconfont.css">
+		<link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="css/default.css">
+		<link href="dist/pagination.css" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			ul,
+			li {
+				list-style: none;
+			}
+
+			#wrapper {
+				width: 1570px;
+				margin: 20px auto;
+				border: 1px solid #dfe6ec;
+			}
+
+			.data-container ul {
+				padding: 0;
+				margin: 0;
+			}
+
+			.data-container li {
+				margin-bottom: 5px;
+				padding: 5px 10px;
+				border-bottom: 1px solid #dfe6ec;
+				color: #000;
+			}
+
+			#htmleaf {
+				background-color: #fff;
+			}
+
+			#top .cell {
+				width: 331px;
+				float: left;
+				padding-left: 10px;
+			}
+
+			#top .cell:first-child {
+				width: 186px;
+			}
+
+			#top {
+				height: 40px;
+				font-size: 14px;
+				color: #000000;
+				font-weight: bold;
+				background-color: #EEF1F6;
+				padding-top: 10px;
+			}
+
+			.data-container ul li .span {
+				width: 20px;
+				float: left;
+				margin-left: 1px;
+			}
+
+			.data-container ul li span {
+				width: 294px;
+				display: inline-block;
+				text-align: center;
+				margin-left: 49px;
+				font-size: 14px;
+			}
+
+			.data-container ul li span:last-child {
+				float: right;
+				margin-right: 34%;
+			}
+
+			.edit {
+				padding: 2px 6px;
+				font-size: 12px;
+				border-radius: 4px;
+				border: 1px solid #c4c4c4;
+				color: #1f2d3d;
+				margin-left: 143px;
+			}
+
+			.del {
+				color: #fff;
+				padding: 2px 6px;
+				font-size: 12px;
+				border-radius: 4px;
+				border: none;
+				background-color: red;
+				margin-left: 10px;
+			}
+			.el-dialog__wrapper {
+				display: none;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				position: fixed;
+				overflow: auto;
+				margin: 0;
+			}
+
+			.el-dialog--small {
+				width: 50%;
+			}
+
+			.el-dialog {
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+				background: #fff;
+				border-radius: 2px;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+				box-sizing: border-box;
+				margin-bottom: 50px;
+			}
+
+			.el-dialog__header {
+				padding: 20px 20px 0;
+			}
+
+			.el-dialog__title {
+				line-height: 1;
+				font-size: 16px;
+				font-weight: 700;
+				color: #1f2d3d;
+			}
+
+			.el-dialog__headerbtn {
+				float: right;
+				background: 0 0;
+				border: none;
+				outline: 0;
+				padding: 0;
+				cursor: pointer;
+				font-size: 16px;
+			}
+			.el-dialog__body {
+			    padding: 30px 20px;
+			    color: #48576a;
+			    font-size: 14px;
+			}
+			.el-dialog__body {
+			    padding: 30px 20px;
+			    color: #48576a;
+			    font-size: 14px;
+			}
+			.el-form-item {
+			    margin-bottom: 22px;
+			}
+			.el-form-item__label {
+			    text-align: right;
+			    vertical-align: middle;
+			    float: left;
+			    font-size: 14px;
+			    color: #48576a;
+			    line-height: 1;
+			    padding: 11px 12px 11px 0;
+			    box-sizing: border-box;
+			}
+			.el-form-item__content {
+			    line-height: 36px;
+			    position: relative;
+			    font-size: 14px;
+			}
+			.el-input {
+			    position: relative;
+			    font-size: 14px;
+			}
+			.el-input, .el-input__inner {
+			    width: 100%;
+			    display: inline-block;
+			}
+			.el-input__inner {
+			    -webkit-appearance: none;
+			    -moz-appearance: none;
+			    appearance: none;
+			    background-color: #fff;
+			    background-image: none;
+			    border-radius: 4px;
+			    border: 1px solid #bfcbd9;
+			    box-sizing: border-box;
+			    color: #1f2d3d;
+			    font-size: inherit;
+			    height: 36px;
+			    line-height: 1;
+			    outline: 0;
+			    padding: 3px 10px;
+			    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+			}
+			.el-input, .el-input__inner {
+			    width: 100%;
+			    display: inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 菜单列表 -->
+			<div class="menu">
+				<div class="sideMenu">
+					<ul>
+						<li class="nLi on">
+							<div class="text">
+								<i class="icon iconfont icon-fangkuaizuhe" style="color:#20a0ff"></i>
+								<a href="index.html">
+									<h3 style="color:#20a0ff">首页</h3>
+								</a>
+							</div>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-wenben"></i>
+								<h3>数据管理</h3>
+							</div>
+							<ul class="sub" style="display: block;">
+								<li><a href="list1.html">用户列表</a></li>
+								<li><a href="list2.html">商家列表</a></li>
+								<li><a href="list3.html">食品列表</a></li>
+								<li><a href="list4.html">订单列表</a></li>
+								<li><a href="list5.html">管理员列表</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-icon-add-3"></i>
+								<h3>添加数据</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="addP.html">添加商铺</a></li>
+								<li><a href="">添加商品</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-xingxing"></i>
+								<h3>图表</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="">用户分布</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-bianji"></i>
+								<h3>编辑</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="">文本编辑</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-shezhi"></i>
+								<h3>设置</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="">管理员设置</a></li>
+							</ul>
+						</li>
+						<li class="nLi">
+							<div class="text">
+								<i class="icon iconfont icon-shuoming"></i>
+								<h3>说明</h3>
+							</div>
+							<ul class="sub">
+								<li><a href="">说明</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- 内容 -->
+			<div class="content">
+				<!-- 首页 -->
+				<div class="home">
+					<div class="he_header">
+						<div class="hr_text">
+							<span class="hr_item">
+								<span class="hr_txt"><a href="index.html" style="text-decoration: none;color: #000000;">首页</a>&nbsp;&nbsp;/&nbsp;&nbsp;数据管理&nbsp;&nbsp;/&nbsp;&nbsp;食品列表</span>
+							</span>
+						</div>
+
+						<div class="hr_user">
+							<img src="img/default.jpg" alt="" class="hr_logo">
+							<ul class="hr_menu" style="display: none;">
+								<li class="hr_list"><a href="index.html" style="color: #000000;">首页</a></li>
+								<li class="hr_list" id="tui">退出</li>
+							</ul>
+						</div>
+					</div>
+					<!-- 数据管理 -->
+					<div id="data">
+						<article class="htmleaf-container" id="htmleaf">
+
+							<div id="wrapper">
+								<div id="top">
+									<div class="cell">&nbsp;</div>
+									<div class="cell">食品名称</div>
+									<div class="cell">食品介绍</div>
+									<div class="cell">评分</div>
+									<div class="cell">操作</div>
+								</div>
+								<section>
+									<div class="data-container">
+
+									</div>
+									<div id="pagination-demo1"></div>
+								</section>
+								<div class="el-dialog__wrapper" style="z-index: 2023;">
+									<div class="el-dialog el-dialog--small" style="top: 15%;">
+										<div class="el-dialog__header"><span class="el-dialog__title">修改食品信息</span><button type="button" aria-label="Close"
+											 class="el-dialog__headerbtn"><i class="el-dialog__close el-icon el-icon-close"></i></button>
+										</div>
+										<div class="el-dialog__body">
+											<form class="el-form">
+												<div class="el-form-item"><label class="el-form-item__label" style="width: 100px;">食品名称</label>
+													<div class="el-form-item__content" style="margin-left: 100px;">
+														<div class="el-input">
+															<!---->
+															<!----><input autocomplete="off" type="text" rows="2" validateevent="true" class="el-input__inner">
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item"><label class="el-form-item__label" style="width: 100px;">食品介绍</label>
+													<div class="el-form-item__content" style="margin-left: 100px;">
+														<div class="el-input">
+															<!---->
+															<!----><input autocomplete="off" type="text" rows="2" validateevent="true" class="el-input__inner">
+															<!---->
+															<!---->
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item"><label class="el-form-item__label" style="width: 100px;">食品分类</label>
+													<div class="el-form-item__content" style="margin-left: 100px;">
+														<div class="el-select">
+															<!---->
+															<div class="el-input">
+																<!----><i class="el-input__icon el-icon-caret-top"></i><input autocomplete="off" placeholder="热销榜"
+																 readonly="readonly" icon="caret-top" type="text" rows="2" class="el-input__inner">
+																<!---->
+																<!---->
+															</div>
+															<div class="resize-triggers">
+																<div class="expand-trigger">
+																	<div style="width: 201px; height: 38px;"></div>
+																</div>
+																<div class="contract-trigger"></div>
+															</div>
+														</div>
+														<!---->
+													</div>
+												</div>
+												<div class="el-form-item"><label class="el-form-item__label" style="width: 100px;">食品图片</label>
+													<div class="el-form-item__content" style="margin-left: 100px;">
+														<div class="avatar-uploader">
+															<div class="el-upload el-upload--text"><img src="//elm.cangdu.org/img/1700df5f2af63548.png" class="avatar"><input
+																 type="file" name="file" class="el-upload__input"></div>
+														</div>
+														<!---->
+													</div>
+												</div>
+											</form>
+											<div class="el-row" style="overflow: auto; text-align: center;">
+												<div class="el-table el-table--fit el-table--enable-row-hover el-table--enable-row-transition" style="margin-bottom: 20px;">
+													<div class="hidden-columns">
+														<div></div>
+														<div></div>
+														<div></div>
+														<div></div>
+													</div>
+													<div class="el-table__header-wrapper">
+														<table cellspacing="0" cellpadding="0" border="0" class="el-table__header" style="width: 651px;">
+															<colgroup>
+																<col name="el-table_1_column_27" width="165">
+																<col name="el-table_1_column_28" width="162">
+																<col name="el-table_1_column_29" width="162">
+																<col name="el-table_1_column_30" width="162">
+															</colgroup>
+															<thead>
+																<tr>
+																	<th colspan="1" rowspan="1" class="el-table_1_column_27 is-leaf">
+																		<div class="cell">规格</div>
+																	</th>
+																	<th colspan="1" rowspan="1" class="el-table_1_column_28 is-leaf">
+																		<div class="cell">包装费</div>
+																	</th>
+																	<th colspan="1" rowspan="1" class="el-table_1_column_29 is-leaf">
+																		<div class="cell">价格</div>
+																	</th>
+																	<th colspan="1" rowspan="1" class="el-table_1_column_30 is-leaf">
+																		<div class="cell">操作</div>
+																	</th>
+																</tr>
+															</thead>
+														</table>
+													</div>
+													<div class="el-table__body-wrapper">
+														<table cellspacing="0" cellpadding="0" border="0" class="el-table__body" style="width: 651px;">
+															<colgroup>
+																<col name="el-table_1_column_27" width="165">
+																<col name="el-table_1_column_28" width="162">
+																<col name="el-table_1_column_29" width="162">
+																<col name="el-table_1_column_30" width="162">
+															</colgroup>
+															<tbody>
+																<tr class="el-table__row ">
+																	<td class="el-table_1_column_27">
+																		<div class="cell">默认</div>
+																	</td>
+																	<td class="el-table_1_column_28">
+																		<div class="cell">0</div>
+																	</td>
+																	<td class="el-table_1_column_29">
+																		<div class="cell">20</div>
+																	</td>
+																	<td class="el-table_1_column_30">
+																		<div class="cell"><button type="button" class="el-button el-button--danger el-button--small">
+																				<!---->
+																				<!----><span>删除</span></button></div>
+																	</td>
+																</tr>
+																<!---->
+															</tbody>
+														</table>
+														<!---->
+													</div>
+													<!---->
+													<!---->
+													<!---->
+													<!---->
+													<div class="el-table__column-resize-proxy" style="display: none;"></div>
+													<div class="resize-triggers">
+														<div class="expand-trigger">
+															<div style="width: 652px; height: 81px;"></div>
+														</div>
+														<div class="contract-trigger"></div>
+													</div>
+												</div> <button type="button" class="el-button el-button--primary" style="margin-bottom: 10px;">
+													<!---->
+													<!----><span>添加规格</span></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+
+
+
+
+
+		<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script src="libs/js/index.js"></script>
+		<script src="js/y.js"></script>
+		<script src="dist/pagination.js"></script>
+		<script src="js/mejs.js"></script>
+	</body>
+</html>
+<script>
+	window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')
+</script>
+<script type="text/javascript">
+	// 退出登录
+	var tui = $("#tui")
+	document.getElementById("tui").addEventListener('click', function() {
+		$.ajax({
+			type: 'GET',
+			url: 'https://elm.cangdu.org/admin/singout',
+			dataType: 'json',
+			success: function(data) {
+				console.log(data)
+				if (data.success) {
+					location.href = 'denglu.html';
+				} else {
+
+				}
+			}
+		});
+	});
+	// 用户列表
+	$.ajax({
+		type: 'GET',
+		url: 'https://elm.cangdu.org/shopping/v2/foods?offset=0&limit=20&restaurant_id=2',
+		dataType: 'json',
+		success: function(data) {
+			console.log(data)
+
+			function createDemo(name) {
+				var container = $('#pagination-' + name);
+				var sources = function() {
+					var result = [];
+
+					for (var i = 1; i < 21990; i++) {
+						result.push(i);
+					}
+
+					return result;
+				}();
+				console.log(sources)
+				var options = {
+					dataSource: sources,
+					className: 'paginationjs-theme-blue',
+					callback: function(response, pagination) {
+						// window.console && console.log(response, pagination);
+
+						var dataHtml = '<ul>';
+
+						$.each(response, function(index, item) {
+							// console.log(item)
+							for (var i = 0; i < data.length; i++) {
+								console.log(data[i].name)
+								dataHtml += '<li><span class="span">></span><span>' + data[i].name +
+									'</span><span style="margin-left:9px;">' + data[i].description + '</span><span>' + data[i].rating +
+									'</span><a href="#" class="edit">编辑</a><a href="#" class="del">删除</a></li>';
+							}
+						});
+
+						dataHtml += '</ul>';
+
+						container.prev().html(dataHtml);
+					}
+				};
+
+				// $.pagination(container, options);
+
+				// container.addHook('beforeInit', function() {
+				// 	// window.console && console.log('beforeInit...');
+				// });
+				container.pagination(options);
+
+				// container.addHook('beforePageOnClick', function() {
+				// 	// window.console && console.log('beforePageOnClick...');
+				// 	//return false
+				// });
+
+				// return container;
+			}
+
+			createDemo('demo1');
+
+		}
+	})
+</script>
+<script type="text/javascript">
+	console.log($(".el-dialog__wrapper"))
+	console.log($(".edit"))
+	$(document).ready(function() {
+		$(".edit").click(function() {
+			console.log(1)
+			$(".el-dialog__wrapper").style.display=block;
+		});
+	})
+</script>
